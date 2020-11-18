@@ -66,7 +66,7 @@ class MessageAdapter(private var chat:MutableList<Chat>,private var image:String
             }
             holder.date_message.setVisibility(View.VISIBLE)
 
-            holder.date_message.text="18 Nov 2020 11:22:01"
+            holder.date_message.text=chat[position].messageDate
             if(chat[position].isseen.equals("true")){
                 holder.seen_message.text="Seen"
             }else{

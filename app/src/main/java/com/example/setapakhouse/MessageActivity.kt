@@ -21,6 +21,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class MessageActivity : AppCompatActivity() {
     lateinit var ref : DatabaseReference
@@ -145,9 +148,15 @@ class MessageActivity : AppCompatActivity() {
         hashMap.put("receiver",receiver)
         hashMap.put("message",message)
         hashMap.put("isseen","false")
+        hashMap.put("messageDate",getTime())
         ref.child("Chats").push().setValue(hashMap)
     }
+    private fun getTime(): String {
 
+        val today = LocalDateTime.now(ZoneId.systemDefault())
+
+        return today.format(DateTimeFormatter.ofPattern("d MMM uuuu HH:mm:ss "))
+    }
     private fun readMessage(myID:String,userID:String,image:String){
         ref=FirebaseDatabase.getInstance().getReference("Chats")
         ref.addValueEventListener(object:ValueEventListener{
