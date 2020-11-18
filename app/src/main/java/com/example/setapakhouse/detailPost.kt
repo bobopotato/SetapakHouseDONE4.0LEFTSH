@@ -219,9 +219,9 @@ class detailPost : AppCompatActivity() {
                                 //requestBtn.visibility = View.INVISIBLE
                             }
                             if(h.child("rentalType").getValue().toString().equals("long")){
-                                txtPrice.text="RM"+h.child("price").getValue().toString()+"/MONTH"
+                                txtPrice.text="RM"+String.format("%.2f",h.child("price").getValue().toString().toDouble())+"/MONTH"
                             }else{
-                                txtPrice.text="RM"+h.child("price").getValue().toString()+"/DAY"
+                                txtPrice.text="RM"+String.format("%.2f",h.child("price").getValue().toString().toDouble())+"/DAY"
                             }
 
                             txtPropertyType.text="Property Type: "+h.child("propertyType").getValue().toString()

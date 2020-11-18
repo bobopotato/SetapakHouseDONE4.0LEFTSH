@@ -1,5 +1,6 @@
 package com.example.setapakhouse.Fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.example.setapakhouse.Model.User
 import com.example.setapakhouse.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_chatroom.*
 import kotlinx.android.synthetic.main.fragment_chat_user.*
 import kotlinx.android.synthetic.main.fragment_chat_user.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -37,6 +40,10 @@ class chatUserFragment : Fragment() {
         // Inflate the layout for this fragment
         val root: View = inflater.inflate(R.layout.fragment_chat_user, container, false)
 
+
+
+//        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
 
         userList= mutableListOf()
 

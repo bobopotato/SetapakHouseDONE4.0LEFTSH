@@ -115,6 +115,7 @@ class incomeFragment : Fragment() {
                                                 }
                                             }
                                             val mLayoutManager = LinearLayoutManager(context)
+                                            mLayoutManager.reverseLayout = true
 
                                             root.incomeRecycle.layoutManager = mLayoutManager
                                             root.incomeRecycle.adapter = incomeAdapter(payerIDList,paidDateTimeList,paidAmountList,propertyNameList,durationList)

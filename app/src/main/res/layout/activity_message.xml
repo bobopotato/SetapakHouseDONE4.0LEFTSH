@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="#e6e6e6"
     android:layout_height="match_parent"
-    tools:context="com.example.fyp_prototype.MessageActivity">
+    tools:context="com.example.setapakhouse.MessageActivity">
 
 
     <androidx.appcompat.widget.Toolbar

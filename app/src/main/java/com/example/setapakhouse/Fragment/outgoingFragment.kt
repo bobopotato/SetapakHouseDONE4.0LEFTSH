@@ -103,10 +103,11 @@ class outgoingFragment : Fragment() {
                                             receiverIDList.clear()
                                             rewardList.clear()
                                             durationList.clear()
+                                            for(p in paymentList){
                                             for(pr in snapshot.children){
                                                 if(!(pr.child("userID").getValue().toString().equals(currentUserID))){
                                                     for(r in rentList){
-                                                        for(p in paymentList){
+
                                                             if(pr.child("propertyID").getValue().toString().equals(r.propertyID) &&
                                                                     r.rentID.equals(p.rentID)){
                                                                 //Toast.makeText(context,h.child("propertyName").getValue().toString(), Toast.LENGTH_SHORT).show()
@@ -127,7 +128,7 @@ class outgoingFragment : Fragment() {
                                                 }
                                             }
                                             val mLayoutManager = LinearLayoutManager(context)
-
+                                            mLayoutManager.reverseLayout = true
                                             root.outgoingRecycle.layoutManager = mLayoutManager
                                             root.outgoingRecycle.adapter = outgoingAdapter(receiverIDList,receivedDateTimeList,receivedAmountList,propertyNameList,rewardList,durationList)
 

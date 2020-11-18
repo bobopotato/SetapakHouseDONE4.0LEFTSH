@@ -1,7 +1,9 @@
 package com.example.setapakhouse
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +27,7 @@ class MessageActivity : AppCompatActivity() {
     lateinit var chatList : MutableList<Chat>
     //val currentUserID="k83T1GSoDjRPH6XIwJlRVP89CEk2"
     //val currentUserID="LfOPyQJQgqPaziIT823zv7DZJzY2"
-    val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
+
 
     lateinit var seenListener: ValueEventListener
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,13 +42,23 @@ class MessageActivity : AppCompatActivity() {
         val toolbar:Toolbar = findViewById(R.id.toolbar)
         val selectedUserID=intent.getStringExtra("selectedUserID")
 
-
+//        messageRecyclerView.setOnClickListener {
+//            val focus = getCurrentFocus()
+//            if(focus!=null) {
+//                val inputMethodManager =
+//                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                inputMethodManager.hideSoftInputFromWindow(focus!!.windowToken, 0)
+//            }
+//        }
 
         toolbar.setNavigationOnClickListener {
+            ref.removeEventListener(seenListener)
             finish()
+
         }
 
         btn_send.setOnClickListener{
+            val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
             if(!(text_send.text.toString().equals(""))){
                 sendMessage(currentUserID,selectedUserID,text_send.text.toString())
             }else{
@@ -54,6 +66,7 @@ class MessageActivity : AppCompatActivity() {
 
             }
             text_send.setText("")
+
         }
 
 
@@ -79,7 +92,7 @@ class MessageActivity : AppCompatActivity() {
 //            }
 //
 //        })
-
+        val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
         ref=FirebaseDatabase.getInstance().getReference("Users").child(selectedUserID)
         ref.addValueEventListener(object :ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
@@ -104,6 +117,7 @@ class MessageActivity : AppCompatActivity() {
     }
 
     private fun seenMessage(userid:String){
+        val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
         ref=FirebaseDatabase.getInstance().getReference("Chats")
         seenListener=ref.addValueEventListener(object:ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
